@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Standard favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-
-<!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-<!-- Android Chrome Icons -->
-<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thad Adams - Computer Engineering Student</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    </head>
+    <title>Thad Adams - Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232e7d32'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3ETA%3C/text%3E%3C/svg%3E">
+    <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232e7d32'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3ETA%3C/text%3E%3C/svg%3E">
+    
     <style>
+        /* =========================== */
+        /* BASE STYLES & CSS VARIABLES */
+        /* =========================== */
+        :root {
+            /* Dark Mode Colors (Default) */
+            --bg-primary: linear-gradient(135deg, #0d1421 0%, #1a2332 50%, #0f1419 100%);
+            --bg-card: rgba(20, 30, 25, 0.95);
+            --bg-skill: rgba(15, 25, 20, 0.8);
+            --text-primary: #e0e0e0;
+            --text-secondary: #c8e6c9;
+            --text-accent: #e8f5e8;
+            --text-muted: #a8d4a8;
+            --green-primary: #2e7d32;
+            --green-secondary: #43a047;
+            --green-light: #388e3c;
+            --border-color: rgba(46, 125, 50, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(46, 125, 50, 0.25);
+        }
+
+        /* Light Mode Colors */
+        .light-mode {
+            --bg-primary: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 50%, #f5f9ff 100%);
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-skill: rgba(248, 249, 250, 0.9);
+            --text-primary: #333333;
+            --text-secondary: #555555;
+            --text-accent: #2c3e50;
+            --text-muted: #7f8c8d;
+            --green-primary: #2e7d32;
+            --green-secondary: #43a047;
+            --green-light: #388e3c;
+            --border-color: rgba(46, 125, 50, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(46, 125, 50, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -28,33 +56,148 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: linear-gradient(135deg, #0d1421 0%, #1a2332 50%, #0f1419 100%);
+            color: var(--text-primary);
             min-height: 100vh;
+            position: relative;
+            transition: all 0.3s ease;
+            
+            /* Background Options - Choose ONE by uncommenting */
+            
+            /* Option 1: Gradient Background (Current - Keep this uncommented) */
+            background: var(--bg-primary);
+            
+            /* Option 2: Subtle Texture Background (Uncomment line below and comment out line above) */
+            /* background: var(--bg-primary), url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.02"><circle cx="30" cy="30" r="2"/></g></g></svg>'); */
+            
+            /* Option 3: Video Background (Uncomment and add your video file) */
+            /* Uncomment the CSS below and add <video> element in HTML body */
+            /*
+            background: rgba(0,0,0,0.7);
+            */
         }
 
+        /* Video Background Styles (Use with Option 3) */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        /* =========================== */
+        /* ANIMATIONS */
+        /* =========================== */
+        
+        /* Fade-in animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Apply animations to main elements */
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        header, .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+
+        /* =========================== */
+        /* LAYOUT & COMPONENTS */
+        /* =========================== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--green-primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 2px solid var(--green-secondary);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .theme-toggle:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        /* Live Clock/Greeting */
+        .live-greeting {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            color: var(--text-accent);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
         header {
-            background: rgba(20, 30, 25, 0.95);
+            background: var(--bg-card);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
+            margin-top: 60px; /* Space for greeting */
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(46, 125, 50, 0.3);
+            box-shadow: 0 8px 32px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .profile-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #2e7d32, #388e3c, #43a047);
+            background: linear-gradient(45deg, var(--green-primary), var(--green-secondary), var(--green-light));
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
@@ -63,18 +206,26 @@
             font-size: 48px;
             font-weight: bold;
             box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 6px 25px rgba(46, 125, 50, 0.5);
         }
 
         h1 {
-            color: #e8f5e8;
+            color: var(--text-accent);
             margin-bottom: 10px;
             font-size: 2.5em;
+            transition: all 0.3s ease;
         }
 
         .tagline {
-            color: #a8d4a8;
+            color: var(--text-muted);
             font-size: 1.2em;
             margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
         .contact-links {
@@ -85,37 +236,59 @@
         }
 
         .contact-links a {
-            background: #2e7d32;
+            background: var(--green-primary);
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 25px;
             transition: all 0.3s ease;
-            border: 1px solid #43a047;
+            border: 1px solid var(--green-secondary);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Enhanced hover effects for contact links */
         .contact-links a:hover {
-            background: #388e3c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+            background: var(--green-light);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        .contact-links a:active {
+            transform: translateY(-1px) scale(1.02);
         }
 
         .section {
-            background: rgba(20, 30, 25, 0.95);
+            background: var(--bg-card);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(46, 125, 50, 0.3);
+            box-shadow: 0 8px 32px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Scroll-based animation trigger */
+        .section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--shadow-hover);
         }
 
         .section h2 {
-            color: #e8f5e8;
+            color: var(--text-accent);
             margin-bottom: 20px;
             font-size: 2em;
-            border-bottom: 3px solid #2e7d32;
+            border-bottom: 3px solid var(--green-primary);
             padding-bottom: 10px;
+            transition: all 0.3s ease;
         }
 
         .skills-grid {
@@ -126,16 +299,24 @@
         }
 
         .skill-category {
-            background: rgba(15, 25, 20, 0.8);
+            background: var(--bg-skill);
             padding: 20px;
             border-radius: 10px;
-            border-left: 4px solid #2e7d32;
-            border: 1px solid rgba(46, 125, 50, 0.2);
+            border-left: 4px solid var(--green-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+            border-left-width: 6px;
         }
 
         .skill-category h3 {
-            color: #e8f5e8;
+            color: var(--text-accent);
             margin-bottom: 10px;
+            transition: all 0.3s ease;
         }
 
         .skill-category ul {
@@ -144,13 +325,19 @@
 
         .skill-category li {
             padding: 5px 0;
-            color: #c8e6c9;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
         }
 
         .skill-category li:before {
             content: "▶";
-            color: #43a047;
+            color: var(--green-light);
             margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover li:before {
+            transform: scale(1.2);
         }
 
         .projects-grid {
@@ -161,27 +348,30 @@
         }
 
         .project-card {
-            background: rgba(15, 25, 20, 0.8);
+            background: var(--bg-skill);
             padding: 25px;
             border-radius: 15px;
-            border-top: 4px solid #2e7d32;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(46, 125, 50, 0.2);
+            border-top: 4px solid var(--green-primary);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.25);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--shadow-hover);
+            border-top-width: 6px;
         }
 
         .project-card h3 {
-            color: #e8f5e8;
+            color: var(--text-accent);
             margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
 
         .project-card p {
-            color: #c8e6c9;
+            color: var(--text-secondary);
             margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
 
         .project-links {
@@ -190,27 +380,32 @@
         }
 
         .project-links a {
-            background: #2e7d32;
+            background: var(--green-primary);
             color: white;
             padding: 8px 16px;
             text-decoration: none;
             border-radius: 20px;
             font-size: 0.9em;
-            transition: background 0.3s ease;
-            border: 1px solid #43a047;
+            transition: all 0.3s ease;
+            border: 1px solid var(--green-secondary);
         }
 
         .project-links a:hover {
-            background: #388e3c;
-            box-shadow: 0 2px 10px rgba(46, 125, 50, 0.4);
+            background: var(--green-light);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+            transform: translateY(-2px) scale(1.05);
         }
 
         footer {
             text-align: center;
             padding: 40px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
         }
 
+        /* =========================== */
+        /* RESPONSIVE DESIGN */
+        /* =========================== */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -228,25 +423,68 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .live-greeting {
+                top: 10px;
+                left: 10px;
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+
+            header {
+                margin-top: 50px;
+            }
+        }
+
+        /* =========================== */
+        /* LOADING ANIMATION */
+        /* =========================== */
+        .loading {
+            opacity: 0;
+        }
+
+        .loaded {
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
         }
     </style>
 </head>
-<body>
+<body class="loading">
+    <!-- Video Background Option (Uncomment to use) -->
+    <!-- <video class="video-background" autoplay muted loop>
+        <source src="your-background-video.mp4" type="video/mp4">
+    </video> -->
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+
+    <!-- Live Greeting/Clock -->
+    <div class="live-greeting" id="liveGreeting">
+        Welcome! Loading...
+    </div>
+
     <div class="container">
         <header>
             <div class="profile-img">TA</div>
             <h1>Thad Adams</h1>
             <p class="tagline">Computer Engineering Student & Technology Enthusiast</p>
             <div class="contact-links">
-                <a href="mailto:Thad.Adams@independentstavecompany.com">Email</a>
-                <a href="https://github.com/ThadAdamsISCO" target="_blank">GitHub</a>
-                <a href="#" onclick="alert('Phone: (417) 718-8661')">Phone</a>
+                <a href="mailto:Thad.Adams@independentstavecompany.com">📧 Email</a>
+                <a href="https://github.com/ThadAdamsISCO" target="_blank">💻 GitHub</a>
+                <a href="#" onclick="alert('Phone: (417) 718-8661')">📞 Phone</a>
             </div>
         </header>
 
         <section class="section">
             <h2>About Me</h2>
-            <p style="font-size: 1.1em; line-height: 1.8; color: #c8e6c9;">
+            <p style="font-size: 1.1em; line-height: 1.8; color: var(--text-secondary);">
                 I'm a passionate Computer Engineering student with hands-on experience in software development, 
                 system administration, and emerging technologies. I love building innovative solutions and 
                 continuously expanding my technical capabilities through practical projects and internships.
@@ -271,7 +509,6 @@
                     <ul>
                         <li>Docker</li>
                         <li>Linux/Unix</li>
-                        <li>VM Ware</li>
                         <li>Git & GitHub</li>
                         <li>MySQL</li>
                         <li>AWS Basics</li>
@@ -297,24 +534,24 @@
                     <h3>Personal Expense Tracker</h3>
                     <p>Web application built with Python and Flask for tracking personal finances with data visualization and budget alerts.</p>
                     <div class="project-links">
-                        <a href="#" target="_blank">Live Demo</a>
-                        <a href="#" target="_blank">GitHub</a>
+                        <a href="#" target="_blank">🚀 Live Demo</a>
+                        <a href="#" target="_blank">💻 GitHub</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>IoT Home Automation</h3>
                     <p>Raspberry Pi-based system for controlling home devices with mobile app interface and voice commands.</p>
                     <div class="project-links">
-                        <a href="#" target="_blank">Demo Video</a>
-                        <a href="#" target="_blank">GitHub</a>
+                        <a href="#" target="_blank">📹 Demo Video</a>
+                        <a href="#" target="_blank">💻 GitHub</a>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>Network Security Scanner</h3>
                     <p>Python tool for automated network vulnerability assessment with detailed reporting capabilities.</p>
                     <div class="project-links">
-                        <a href="#" target="_blank">Documentation</a>
-                        <a href="#" target="_blank">GitHub</a>
+                        <a href="#" target="_blank">📚 Documentation</a>
+                        <a href="#" target="_blank">💻 GitHub</a>
                     </div>
                 </div>
             </div>
@@ -323,53 +560,167 @@
         <section class="section">
             <h2>Experience & Education</h2>
             <div style="space-y: 20px;">
-                <div style="margin-bottom: 25px; padding: 20px; background: rgba(15, 25, 20, 0.8); border-radius: 10px; border-left: 4px solid #2e7d32; border: 1px solid rgba(46, 125, 50, 0.2);">
-                    <h3 style="color: #e8f5e8; margin-bottom: 5px;">Computer Engineering Student</h3>
-                    <p style="color: #a8d4a8; margin-bottom: 10px;">Missouri S&T • 2025 - Present</p>
-                    <p style="color: #c8e6c9;">As a computer engineer, I design and build systems that integrate hardware, software, and automation—ranging from full-stack applications and virtualized infrastructures to embedded IoT solutions and AI-powered tools.</p>
+                <div style="margin-bottom: 25px; padding: 20px; background: var(--bg-skill); border-radius: 10px; border-left: 4px solid var(--green-primary); border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--text-accent); margin-bottom: 5px;">Computer Engineering Student</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 10px;">University Name • 2022 - Present</p>
+                    <p style="color: var(--text-secondary);">Relevant coursework: Data Structures, Algorithms, Computer Networks, Database Systems, Software Engineering</p>
                 </div>
-                <div style="margin-bottom: 25px; padding: 20px; background: rgba(15, 25, 20, 0.8); border-radius: 10px; border-left: 4px solid #2e7d32; border: 1px solid rgba(46, 125, 50, 0.2);">
-                    <h3 style="color: #e8f5e8; margin-bottom: 5px;">IT Support Intern</h3>
-                    <p style="color: #a8d4a8; margin-bottom: 10px;">Missouri Cooperage • Spring 2025 - Present</p>
-                    <p style="color: #c8e6c9;">Provided IT support across manufacturing and office environments, handling hardware deployment, troubleshooting, user assistance, and system maintenance.</p>
-                    <p style="color: #a8d4a8; margin-bottom: 10px;">Lebanon R3 Schools • Summer 2024</p>
-                    <p style="color: #c8e6c9;"> Assisted in district-wide IT operations including device setup, network support, software deployment, and classroom technology maintenance.</p>
+                <div style="margin-bottom: 25px; padding: 20px; background: var(--bg-skill); border-radius: 10px; border-left: 4px solid var(--green-primary); border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <h3 style="color: var(--text-accent); margin-bottom: 5px;">IT Support Intern</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 10px;">Tech Company • Summer 2024</p>
+                    <p style="color: var(--text-secondary);">Provided technical support, managed system deployments, and automated routine maintenance tasks.</p>
                 </div>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 Thad Adams. Built with passion and code.</p>
+        <p>&copy; 2024 Thad Adams. Built with passion and code. ✨</p>
     </footer>
 
     <script>
-        // Add smooth scrolling and interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add fade-in animation on scroll
+        /* ================================== */
+        /* JAVASCRIPT FOR ENHANCED FEATURES */
+        /* ================================== */
+
+        // 1. DARK MODE TOGGLE FUNCTIONALITY
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to 'dark'
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        // Apply the current theme
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.innerHTML = '☀️ Light Mode';
+        } else {
+            themeToggle.innerHTML = '🌙 Dark Mode';
+        }
+
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            let theme;
+            if (body.classList.contains('light-mode')) {
+                theme = 'light';
+                themeToggle.innerHTML = '☀️ Light Mode';
+            } else {
+                theme = 'dark';
+                themeToggle.innerHTML = '🌙 Dark Mode';
+            }
+            
+            // Save theme preference
+            localStorage.setItem('theme', theme);
+        });
+
+        // 2. LIVE CLOCK AND GREETING
+        function updateGreeting() {
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const dayName = days[now.getDay()];
+            const monthName = months[now.getMonth()];
+            const date = now.getDate();
+            
+            // Format time (12-hour format)
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 should be 12
+            
+            const timeString = `${hours}:${minutes} ${ampm}`;
+            
+            // Create greeting based on time
+            let greeting;
+            const hour = now.getHours();
+            if (hour < 12) {
+                greeting = "Good Morning! ☀️";
+            } else if (hour < 17) {
+                greeting = "Good Afternoon! ☀️";
+            } else {
+                greeting = "Good Evening! 🌙";
+            }
+            
+            const fullGreeting = `${greeting} It's ${dayName}, ${monthName} ${date} • ${timeString}`;
+            document.getElementById('liveGreeting').textContent = fullGreeting;
+        }
+
+        // Update greeting immediately and then every second
+        updateGreeting();
+        setInterval(updateGreeting, 1000);
+
+        // 3. SCROLL-BASED ANIMATIONS
+        function animateOnScroll() {
             const sections = document.querySelectorAll('.section');
             
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
             sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(section);
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                // Trigger animation when section is 70% visible
+                if (scrollY > (sectionTop + sectionHeight * 0.3 - windowHeight)) {
+                    section.classList.add('animate');
+                }
+            });
+        }
+
+        // 4. PAGE LOAD ANIMATIONS
+        window.addEventListener('load', () => {
+            // Remove loading class to trigger fade-in
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
+            
+            // Trigger initial scroll animation check
+            animateOnScroll();
+        });
+
+        // 5. SCROLL EVENT LISTENER
+        window.addEventListener('scroll', animateOnScroll);
+
+        // 6. SMOOTH SCROLLING FOR ANY INTERNAL LINKS (if you add them later)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
+
+        // 7. KEYBOARD SHORTCUTS (Bonus feature)
+        document.addEventListener('keydown', (e) => {
+            // Press 'T' key to toggle theme
+            if (e.key.toLowerCase() === 't' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                const activeElement = document.activeElement;
+                // Only trigger if not typing in an input field
+                if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
+                    themeToggle.click();
+                }
+            }
+        });
+
+        // 8. ENHANCED HOVER EFFECTS WITH JAVASCRIPT
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        console.log('🚀 Portfolio loaded successfully! Press "T" to toggle theme.');
     </script>
 </body>
 </html>
