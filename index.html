@@ -474,7 +474,7 @@
         <header>
             <div class="profile-img">TA</div>
             <h1>Thad Adams</h1>
-            <p class="tagline">Computer Engineering Student & IT Specialist</p>
+            <p class="tagline">Computer Engineering Student & Technology Enthusiast</p>
             <div class="contact-links">
                 <a href="mailto:Thad.Adams@independentstavecompany.com">📧 Email</a>
                 <a href="https://github.com/ThadAdamsISCO" target="_blank">💻 GitHub</a>
@@ -632,7 +632,7 @@
             hours = hours % 12;
             hours = hours ? hours : 12; // 0 should be 12
             
-            const timeString = ${hours}:${minutes} ${ampm};
+            const timeString = `${hours}:${minutes} ${ampm}`;
             
             // Create greeting based on time
             let greeting;
@@ -645,7 +645,7 @@
                 greeting = "Good Evening! 🌙";
             }
             
-            const fullGreeting = ${greeting} It's ${dayName}, ${monthName} ${date} • ${timeString};
+            const fullGreeting = `${greeting} It's ${dayName}, ${monthName} ${date} • ${timeString}`;
             document.getElementById('liveGreeting').textContent = fullGreeting;
         }
 
