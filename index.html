@@ -1926,34 +1926,20 @@ class TerminalManager {
         this.terminal = document.getElementById('terminalContent');
         this.commands = [
             { type: 'command', text: 'whoami' },
-            { type: 'output', text: 'IT & Enterprise Management | Missouri S&T | IT Systems & Cabling' },
+            { type: 'output', text: 'IT & Enterprise Management | Missouri S&T | CISCO' },
             { type: 'command', text: 'it skills.txt' },
             { type: 'output', text: 'Python • Java • C++ • Docker • Linux • AI/ML' },
             { type: 'command', text: 'echo "There\'s no place like 127.0.0.1"' },
             { type: 'output', text: 'There\'s no place like 127.0.0.1' }
         ];
         this.currentCommand = 0;
-        this.typingSpeed = 50; // ⏳ typing speed in ms per character
+        this.typingSpeed = 50; // ms per character
 
-        this.init();
-    }
-
-    init() {
-        // Start typing when section is visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && this.currentCommand === 0) {
-                    this.startTerminalAnimation();
-                }
-            });
-        }, { threshold: 0.3 });
-
-        if (this.terminal) {
-            observer.observe(this.terminal);
-        }
+        this.startTerminalAnimation(); // ✅ run immediately on page load
     }
 
     startTerminalAnimation() {
+        if (!this.terminal) return;
         this.terminal.innerHTML = '';
         this.currentCommand = 0;
         this.executeNextCommand();
@@ -1992,7 +1978,7 @@ class TerminalManager {
                 clearInterval(interval);
                 if (callback) callback();
             }
-        }, this.typingSpeed); // ⏳ adjust typing speed here
+        }, this.typingSpeed);
     }
 }
         
