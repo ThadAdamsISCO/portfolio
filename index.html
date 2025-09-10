@@ -2247,14 +2247,18 @@
             initializeFallback() {
                 console.log('🔧 Loading fallback functionality...');
                 
+// Set default theme to dark
+document.documentElement.setAttribute('data-theme', 'dark');
+                
+                
                 // Basic theme toggle fallback
-                const themeToggle = document.getElementById('themeToggle');
-                if (themeToggle) {
-                    themeToggle.addEventListener('click', () => {
-                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                        document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
-                    });
-                }
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    });
+}
 
                 // Basic greeting fallback
                 const greeting = document.getElementById('liveGreeting');
