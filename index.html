@@ -1955,19 +1955,24 @@ class TerminalManager {
             { type: 'output', text: 'There\'s no place like 127.0.0.1' }
         ];
         this.currentCommand = 0;
+        this.typingSpeed = 50; // ⏳ typing speed in ms per character
+
         this.init();
     }
 
     init() {
+        // Start typing when section is visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && this.currentCommand === 0) {
                     this.startTerminalAnimation();
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
-        observer.observe(this.terminal);
+        if (this.terminal) {
+            observer.observe(this.terminal);
+        }
     }
 
     startTerminalAnimation() {
@@ -2009,7 +2014,7 @@ class TerminalManager {
                 clearInterval(interval);
                 if (callback) callback();
             }
-        }, 40); // typing speed in ms per character
+        }, this.typingSpeed); // ⏳ adjust typing speed here
     }
 }
         
