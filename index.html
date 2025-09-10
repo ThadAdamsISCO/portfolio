@@ -1241,6 +1241,52 @@
       I love building innovative solutions and continuously expanding my
       technical capabilities through practical projects and internships.
     </p>
+      
+    <!-- Interactive Terminal -->
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <div class="terminal-title">thad@portfolio:~</div>
+      </div>
+      <div class="terminal-content" id="terminalContent">
+        <div class="terminal-line">
+          <span class="terminal-prompt">$ </span>
+          <span class="terminal-command">whoami</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output">
+            IT &amp; Enterprise Management | Missouri S&amp;T | IT Systems &amp; Cabling
+          </span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$ </span>
+          <span class="terminal-command">it skills.txt</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output">Python • Java • C++ • Docker • Linux • AI/ML</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$ </span>
+          <span class="terminal-command">echo "There's no place like 127.0.0.1"</span>
+        </div>
+        <div class="terminal-line">
+          <span class="terminal-output">There's no place like 127.0.0.1</span>
+        </div>
+
+        <!-- Interactive input line -->
+        <div class="terminal-input-line">
+          <span class="terminal-prompt">$ </span>
+          <input
+            type="text"
+            class="terminal-input"
+            id="terminalInput"
+            placeholder="Try: help, projects, contact, clear"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1907,7 +1953,71 @@
                 }, 100);
             }
         }
+        // 8. INTERACTIVE TERMINAL 
+class TerminalManager {
+    constructor() {
+        this.terminal = document.getElementById('terminalContent');
+        this.commands = [
+            { delay: 0, type: 'command', text: 'whoami' },
+            { delay: 500, type: 'output', text: 'IT & Enterprise Management | Missouri S&T | IT Systems & Cabling' },
+            { delay: 1000, type: 'command', text: 'it skills.txt' },
+            { delay: 1500, type: 'output', text: 'Python • Java • C++ • Docker • Linux • AI/ML' },
+            { delay: 2000, type: 'command', text: 'echo "There\'s no place like 127.0.0.1"' },
+            { delay: 2500, type: 'output', text: 'There\'s no place like 127.0.0.1' }
+        ];
+        this.currentCommand = 0;
+                
+        this.init();
+    }
 
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && this.currentCommand === 0) {
+                    this.startTerminalAnimation();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(this.terminal);
+    }
+
+    startTerminalAnimation() {
+        this.terminal.innerHTML = '';
+        this.currentCommand = 0;
+        this.executeNextCommand();
+    }
+
+    executeNextCommand() {
+        if (this.currentCommand >= this.commands.length) return;
+
+        const command = this.commands[this.currentCommand];
+                
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+                    
+            if (command.type === 'command') {
+                line.innerHTML = `
+                    <span class="terminal-prompt">$ </span>
+                    <span class="terminal-command">${command.text}</span>
+                `;
+            } else if (command.type === 'output') {
+                line.innerHTML = `<span class="terminal-output">${command.text}</span>`;
+            } else if (command.type === 'prompt') {
+                line.innerHTML = `
+                    <span class="terminal-prompt">$ </span>
+                    <span class="terminal-cursor"> </span>
+                `;
+            }
+                    
+            this.terminal.appendChild(line);
+            this.currentCommand++;
+            this.executeNextCommand();
+        }, command.delay);
+    }
+}
+        
         // 9. ENHANCED INTERSECTION OBSERVER FOR ANIMATIONS
         class AnimationManager {
             constructor() {
