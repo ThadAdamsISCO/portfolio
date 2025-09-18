@@ -1171,6 +1171,46 @@
     </style>
 </head>
 <body>
+    <!-- Work in Progress Banner -->
+<div id="wipBanner" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(45deg, #fbbf24, #f59e0b);
+    color: #1f2937;
+    text-align: center;
+    padding: 15px 20px;
+    font-weight: 800;
+    font-size: 18px;
+    z-index: 99999;
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+    transform: translateY(-100%);
+    transition: transform 0.5s ease-out;
+">
+    🚧 PORTFOLIO UPDATES IN PROGRESS 🚧
+</div>
+
+<script>
+// Show and hide the WIP banner
+document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('wipBanner');
+    
+    // Show banner after 500ms
+    setTimeout(() => {
+        banner.style.transform = 'translateY(0)';
+    }, 500);
+    
+    // Hide banner after 3 seconds
+    setTimeout(() => {
+        banner.style.transform = 'translateY(-100%)';
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            banner.remove();
+        }, 500);
+    }, 3000);
+});
+</script>
     <!-- NEW: Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
